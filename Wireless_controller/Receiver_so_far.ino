@@ -6,13 +6,18 @@ TFT_eSPI tft = TFT_eSPI();
 
 
 typedef struct struc_inputs { //setup of datastructure which data is sent in, matches sender
-  int buttonA;
-  int buttonB;
-  int buttonX;
-  int buttonY;
-  int buttonJoy;
-  int JoyX;
-  int JoyY;
+  int start;
+  int select;
+  int button1;
+  int button2;
+  int button3;
+  int button4;
+  int button5;
+  int button6;
+  int JoyUp;
+  int JoyDown;
+  int JoyLeft;
+  int JoyRight;
   }struc_inputs; //aliase that means we don't have to type struct every time defining structure
 
 
@@ -22,30 +27,38 @@ unsigned long lastPrintTime;
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) { //copies incoming data to data structure
   memcpy(&Controller_data, incomingData, sizeof(Controller_data));
 
-//unsigned long currentTime = millis();
- //if (currentTime - lastPrintTime >= 1000) {
- //   lastPrintTime = currentTime;
-  //Serial.print("\r");
-  //Serial.print("Bytes received: ");
-  //Serial.println(len);
- //Serial.print("x: ");
-  //Serial.println(Controller_data.JoyX);
- // Serial.print("y: ");
- // Serial.println(Controller_data.JoyY);
- // Serial.println("A:");
- // Serial.println(Controller_data.buttonA);
- // Serial.println("B:");
- // Serial.println(Controller_data.buttonB);
-  //Serial.println("X:");
-  //Serial.println(Controller_data.buttonX);
- // Serial.println("Y:");
- // Serial.println(Controller_data.buttonY);
-   // Serial.println("Joy_Button:");
-  //Serial.println(Controller_data.buttonJoy);
-  
-;
+/*unsigned long currentTime = millis();
+ if (currentTime - lastPrintTime >= 1000) {
+  lastPrintTime = currentTime;
+  Serial.print("\r");
+  Serial.print("Bytes received: ");
+  Serial.println(len);
+  Serial.print("Up: ");
+  Serial.println(Controller_data.JoyUp);
+  Serial.print("Down: ");
+  Serial.println(Controller_data.JoyDown);
+  Serial.print("Left: ");
+  Serial.println(Controller_data.JoyLeft);
+    Serial.print("Right: ");
+  Serial.println(Controller_data.JoyRight);
+  Serial.println("1:");
+  Serial.println(Controller_data.button1);
+  Serial.println("2:");
+  Serial.println(Controller_data.button2);
+  Serial.println("3:");
+  Serial.println(Controller_data.button3);
+  Serial.println("4:");
+  Serial.println(Controller_data.button4);
+  Serial.println("5:");
+  Serial.println(Controller_data.button5);
+  Serial.println("6:");
+  Serial.println(Controller_data.button6);
+  Serial.println("Start:");
+  Serial.println(Controller_data.start);
+  Serial.println("select:");
+  Serial.println(Controller_data.select);
+  } */
 
-//}
 }
  
 void setup() {
@@ -71,22 +84,32 @@ void setup() {
 }
  
 void loop() {
-  tft.fillRect(10, 10, 100, 20, TFT_BLACK);
+  //tft.fillRect(10, 10, 100, 20, TFT_BLACK); //fillredact no longer needed. Can be used for analog joystick
   tft.setCursor(10, 10);
-  tft.printf("x%d",Controller_data.JoyX);
-  tft.fillRect(10, 30, 100, 20, TFT_BLACK);
+  tft.printf("1:%d",Controller_data.button1);
+  //tft.fillRect(10, 30, 100, 20, TFT_BLACK);
   tft.setCursor(10, 30);
-  tft.printf("y%d",Controller_data.JoyY);
+  tft.printf("2:%d",Controller_data.button2);
   tft.setCursor(10, 50);
-  tft.printf("A%d",Controller_data.buttonA);
+  tft.printf("3:%d",Controller_data.button3);
   tft.setCursor(10, 70);
-  tft.printf("B%d",Controller_data.buttonB);
+  tft.printf("4:%d",Controller_data.button4);
   tft.setCursor(10, 90);
-  tft.printf("X%d",Controller_data.buttonX);
+  tft.printf("5:%d",Controller_data.button5);
   tft.setCursor(10, 110);
-  tft.printf("Y%d",Controller_data.buttonY);
+  tft.printf("6:%d",Controller_data.button6);
   tft.setCursor(10, 130);
-  tft.printf("buttonJoy%d",Controller_data.buttonJoy);
+  tft.printf("start:%d",Controller_data.start);
+  tft.setCursor(10, 150);
+  tft.printf("select:%d",Controller_data.select);
+  tft.setCursor(120, 10);
+  tft.printf("JoyUp:%d",Controller_data.JoyUp);
+  tft.setCursor(120, 30);
+  tft.printf("JoyDown:%d",Controller_data.JoyDown);
+  tft.setCursor(120, 50);
+  tft.printf("JoyLeft:%d",Controller_data.JoyLeft);
+  tft.setCursor(120, 70);
+  tft.printf("JoyRight:%d",Controller_data.JoyRight);
 
 delay(10);
 

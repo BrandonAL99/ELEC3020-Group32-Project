@@ -4,23 +4,33 @@
 uint8_t broadcastAddress[] = {0x30,0x30,0xf9,0x59,0xc6,0xb0}; //receiver MAC address
 
 
-typedef struct struc_inputs { //setup of datastructure which data is sent in
-  int buttonA;
-  int buttonB;
-  int buttonX;
-  int buttonY;
-  int buttonJoy;
-  int JoyX;
-  int JoyY;
+typedef struct struc_inputs { //setup of datastructure which data is sent in, matches sender
+  int start;
+  int select;
+  int button1;
+  int button2;
+  int button3;
+  int button4;
+  int button5;
+  int button6;
+  int JoyUp;
+  int JoyDown;
+  int JoyLeft;
+  int JoyRight;
   }struc_inputs; //aliase that means we don't have to type struct every time defining structure
 
-int Pin_buttonA=1; //pin number definitions
-int Pin_buttonB=2;
-int Pin_buttonX=3;
-int Pin_buttonY=10;
-int Pin_buttonJoy=16;
-int Pin_JoyX=12;
-int Pin_JoyY=13;
+int Pin_button1=1; //pin number definitions
+int Pin_button2=2;
+int Pin_button3=3;
+int Pin_button4=10;
+int Pin_button5=11;
+int Pin_button6=12;
+int Pin_JoyUp = 13;
+int Pin_JoyDown = 16;
+int Pin_JoyLeft = 21;
+int Pin_JoyRight = 17;
+int Pin_start = 18;
+int Pin_select = 44;
 
 struc_inputs input_var; //creates an instance of the defined structure
 esp_now_peer_info_t peerInfo; //variable to store info about peer
@@ -50,36 +60,42 @@ void setup() {
     Serial.println("Failed to add peer");
     return;
   }
-  pinMode(Pin_buttonA,INPUT_PULLUP); //pin definitions
-  pinMode(Pin_buttonB,INPUT_PULLUP);
-  pinMode(Pin_buttonX,INPUT_PULLUP);
-  pinMode(Pin_buttonY,INPUT_PULLUP);
-  pinMode(Pin_buttonJoy,INPUT_PULLUP);
-  pinMode(Pin_JoyX,INPUT);
-  pinMode(Pin_JoyY,INPUT);
+  pinMode(Pin_button1,INPUT_PULLUP); //pin definitions
+  pinMode(Pin_button2,INPUT_PULLUP);
+  pinMode(Pin_button3,INPUT_PULLUP);
+  pinMode(Pin_button4,INPUT_PULLUP);
+  pinMode(Pin_button5,INPUT_PULLUP);
+  pinMode(Pin_button6,INPUT_PULLUP);
+  pinMode(Pin_start,INPUT_PULLUP);
+  pinMode(Pin_select,INPUT_PULLUP);
+  pinMode(Pin_JoyUp,INPUT_PULLUP);
+  pinMode(Pin_JoyDown,INPUT_PULLUP);
+  pinMode(Pin_JoyLeft,INPUT_PULLUP);
+  pinMode(Pin_JoyRight,INPUT_PULLUP);
   
 }
 
 
 void loop() {
 
-  input_var.buttonA = !digitalRead(Pin_buttonA);
-  input_var.buttonB = !digitalRead(Pin_buttonB);
-  input_var.buttonX = !digitalRead(Pin_buttonX);
-  input_var.buttonY = !digitalRead(Pin_buttonY);
-  input_var.buttonJoy = !digitalRead(Pin_buttonJoy);
-  input_var.JoyX = analogRead(Pin_JoyX);
-  input_var.JoyY = analogRead(Pin_JoyY);
-  Serial.print("\n");
- Serial.print(analogRead(Pin_JoyY));
- Serial.print(analogRead(Pin_JoyX));
-  esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &input_var, sizeof(input_var));
+  input_var.button1 = !digitalRead(Pin_button1);
+  input_var.button2 = !digitalRead(Pin_button2);
+  input_var.button3 = !digitalRead(Pin_button3);
+  input_var.button4 = !digitalRead(Pin_button4);
+  input_var.button5 = !digitalRead(Pin_button5);
+  input_var.button6 = !digitalRead(Pin_button6);
+  input_var.JoyUp = !digitalRead(Pin_JoyUp);
+  input_var.JoyDown = !digitalRead(Pin_JoyDown);
+  input_var.JoyLeft = !digitalRead(Pin_JoyLeft);
+  input_var.JoyRight = !digitalRead(Pin_JoyRight);
+  
+ esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &input_var, sizeof(input_var));
 
-  //if (result == ESP_OK) {
-   //Serial.println("Sent with success");
- //  } else {
- //      Serial.println("Error sending data");
- //   }
+  /*if (result == ESP_OK) {
+   Serial.println("Sent with success");
+   } else {
+       Serial.println("Error sending data");
+    }
   
   delay(10);  // Small delay to allow other tasks
-}
+} */
