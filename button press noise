@@ -3,23 +3,25 @@ int button_1 = 1;
 int button_2 = 14;
 
 void setup() {
-  pinMode(button_1, INPUT);
-  pinMode(button_2, INPUT);
+  pinMode(button_1, INPUT_PULLUP);  
+  pinMode(button_2, INPUT_PULLUP);  
   pinMode(speaker, OUTPUT);
 }
 
 void loop() {
-  if(digitalRead(button_1) == LOW)
+  if(digitalRead(button_1) == LOW)  // Button pressed
   {
-    tone(speaker, 1500, 500);
-    delay(200);
-    noTone(speaker);
+    tone(speaker, 1500, 500);  // Play sound for button 1
+    delay(200);                // Small delay
+    noTone(speaker);           // Stop sound
+    delay(200);                // Prevent bouncing
   }
 
-  if(digitalRead(button_2) == LOW)
+  if(digitalRead(button_2) == LOW)  // Button pressed
   {
-    tone(speaker, 5000, 500);
-    delay(200);
-    noTone(speaker);
+    tone(speaker, 5000, 500);  // Play sound for button 2
+    delay(200);                // Small delay
+    noTone(speaker);           // Stop sound
+    delay(200);                // Prevent bouncing
   }
 }
