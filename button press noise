@@ -1,0 +1,25 @@
+int speaker = 12;
+int button_1 = 1;
+int button_2 = 14;
+
+void setup() {
+  pinMode(button_1, INPUT);
+  pinMode(button_2, INPUT);
+  pinMode(speaker, OUTPUT);
+}
+
+void loop() {
+  if(digitalRead(button_1) == LOW)
+  {
+    tone(speaker, 1500, 500);
+    delay(200);
+    noTone(speaker);
+  }
+
+  if(digitalRead(button_2) == LOW)
+  {
+    tone(speaker, 5000, 500);
+    delay(200);
+    noTone(speaker);
+  }
+}
