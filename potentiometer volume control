@@ -1,0 +1,27 @@
+const int potPin = A0;  // Pin where potentiometer is connected
+const int pwmPin = 9;   // PWM pin for speaker
+int potValue = 0;       // Variable to store potentiometer value
+int pwmValue = 0;       // Variable to store mapped PWM value (for controlling volume)
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(pwmPin, OUTPUT);
+}
+
+void loop() {
+  // Read the potentiometer value (0-1023)
+  potValue = analogRead(potPin);
+
+  // Map the potentiometer value to a PWM value (0-255)
+  pwmValue = map(potValue, 0, 1023, 0, 255);
+
+  // Output the PWM value to the PWM pin
+  analogWrite(pwmPin, pwmValue);
+
+  Serial.print("Volume: ");
+  Serial.print(potValue);
+
+  // Small delay to avoid spamming the serial monitor
+  delay(100);
+}
+
