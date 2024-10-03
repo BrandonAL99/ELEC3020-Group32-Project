@@ -2,6 +2,12 @@
 
 const unsigned char song[] PROGMEM = {
   //convert any mp3 file to code using Audio Encoder software 
+  */
+  Download:
+    Windows: EncodeAudio-windows.zip
+    Mac OS X: EncodeAudio-macosx.zip - the mac one doesn't work so i can't do it
+    Linux: EncodeAudio-linux.zip
+  /*
 };
 
 void setup()
