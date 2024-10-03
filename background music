@@ -1,0 +1,14 @@
+#include <PCM.h>
+
+const unsigned char sample[] PROGMEM = {
+  //convert any mp3 file to code using Audio Encoder software 
+};
+
+void setup()
+{
+  startPlayback(sample, sizeof(sample));
+}
+
+void loop()
+{
+}
